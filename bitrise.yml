@@ -1,0 +1,39 @@
+#
+#  bitrise.yml
+#
+# CLI metadata
+
+format_version: 1.1.0
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+
+# Workflow trigger map
+
+workflows:
+
+  mobSF-check-diff:
+    steps:
+      - script:
+          inputs:
+          - content: |
+              #!/bin/bash
+              sh prepare_mobsf.sh ProjectName $BITRISE_GIT_BRANCH $BITRISEIO_GIT_BRANCH_DEST
+    after_run:
+      - upload-mobSF
+
+  mobSF-check-project:
+    steps:
+      - script:
+          inputs:
+          - content: |
+              #!/bin/bash
+              sh prepare_mobsf.sh ProjectName
+    after_run:
+      - upload-mobSF
+
+  upload-mobSF:
+    steps:
+    - script:
+        inputs:
+        - content: |
+            #!/bin/bash
+            curl -F "file=mobsf_files.zip" mobsf.yourhost.com/api/v1/upload -H "Authorization:$MOBSF_API_TOKEN"
