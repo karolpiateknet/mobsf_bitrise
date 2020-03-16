@@ -1,4 +1,4 @@
-# This repository is part of [iOS Security Analysis with MobSF](https://www.netguru.com)
+# This repository is part of [iOS Security Analysis with MobSF](https://www.netguru.com/codestories/ios-security-analysis-with-mobsf)
 Read the codestory for more information. 
 ## Using MobSF with Bitrise
 
